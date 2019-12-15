@@ -7,10 +7,6 @@ class Body {
         this.pos = createVector(random(maxPlanetSize, (canvasWidth-maxPlanetSize)), random(maxPlanetSize, (canvasHeight-maxPlanetSize)));
         this.velocity = createVector();
         this.acceleration = createVector();
-
-        /* Chaos */
-        // this.velocity = p5.Vector.random2D();
-        // this.acceleration = p5.Vector.random2D();
         
         /* Style-related */
         this.color = random(CONSTANTS['bodyColors']);

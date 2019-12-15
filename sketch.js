@@ -21,10 +21,6 @@ function setup() {
 	body_1 = new Body(floor(random(150, 250)), floor(random(150, 250)));
 	body_2 = new Body(floor(random(50, 100)), floor(random(50, 100)));
 
-	// console.log(body_1);
-	// console.log(body_2);
-	// console.log(calculateAttraction(body_1, body_2));
-
 }
 
 function draw() {
