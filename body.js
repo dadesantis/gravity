@@ -11,12 +11,23 @@ class Body {
         /* Style-related */
         this.color = random(CONSTANTS['bodyColors']);
         this.textOffset = JSON.stringify(this.mass).length;
-        this.ts = floor(diameter/5);
+        this.ts = floor(diameter/6);
     }
 
+    /* Apply a given force to a body given its mass
+     * A = F / M
+    */
     applyForce(force) {
         let f = p5.Vector.div(force, this.mass);
         this.acceleration.add(f);
+    }
+
+    /* Calculate the current momentum of a body
+     * P = M * V
+     */
+    calcMomentum() {
+        let p = p5.Vector.mult(this.velocity, this.mass);
+        return floor(p.mag());
     }
 
     /* Draw the initial Body */
@@ -25,7 +36,8 @@ class Body {
         ellipse(this.pos.x, this.pos.y, this.diameter);
         fill('black');
         textSize(this.ts);
-        text(this.mass, this.pos.x - (this.ts - this.textOffset), this.pos.y + this.textOffset);
+        text('m = ' + this.mass, this.pos.x - this.ts, this.pos.y + this.textOffset);
+        text('P =' + this.calcMomentum(), this.pos.x - (this.ts - this.textOffset), this.pos.y + this.ts);
     }
 
     /* Move the Body in the direction of the forces on it */
