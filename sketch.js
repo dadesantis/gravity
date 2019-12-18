@@ -12,20 +12,20 @@ function setup() {
 
 	/* Canvas Styling */
 	canvas = createCanvas(1900, 850);
-	canvas.background('navy');
+	canvas.background('black');
 	canvas.style('margin', 'auto');
 	canvas.style('display', 'block');
 	canvas.style('padding-top', '10px');
 
 	/* Scene Objects */
-	body_1 = new Body(floor(random(150, 250)), floor(random(150, 250)));
-	body_2 = new Body(floor(random(50, 100)), floor(random(50, 100)));
+	body_1 = new Body(random(maxPlanetSize, (canvasWidth-maxPlanetSize)), random(maxPlanetSize, (canvasHeight-maxPlanetSize)), floor(random(150, 400)), floor(random(200, 400)));
+	body_2 = new Body(random(maxPlanetSize, (canvasWidth-maxPlanetSize)), random(maxPlanetSize, (canvasHeight-maxPlanetSize)), floor(random(25, 100)), floor(random(50, 100)));
 
 }
 
 function draw() {
 
-	canvas.background('navy');
+	canvas.background('black');
 
 	body_1.applyForce(calculateAttraction(body_1, body_2));
 	body_2.applyForce(calculateAttraction(body_2, body_1));

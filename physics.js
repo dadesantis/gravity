@@ -1,5 +1,5 @@
 var CONSTANTS = {
-    'MAX_SPEED': 10,
+    'MAX_SPEED': 20,
     'G': 15,
     'bodyColors': ['brown', 'yellow', 'green']
 }
@@ -17,7 +17,7 @@ function calculateAttraction(body_a, body_b) {
 }
 
 function checkCollision(body_a, body_b) {
-    let r = Math.sqrt(Math.pow(body_b.pos.x - body_a.pos.x, 2) + Math.pow(body_b.pos.y - body_a.pos.y, 2));
+    let r = Math.sqrt(Math.pow(body_b.pos.x - body_a.pos.x, 2) + Math.pow(body_b.yPos - body_a.yPos, 2));
 
     if (body_a.diameter > body_b.diameter && r < 0) {
         let newV_b = body_b.velocity.mult(-1);

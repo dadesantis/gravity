@@ -1,19 +1,20 @@
 class Body {
     
-    constructor(diameter, mass) {
+    constructor(xPos, yPos, diameter, mass) {
         /* Physics-related parameters */
         this.diameter = diameter;
         this.mass = mass;
-        this.pos = createVector(random(maxPlanetSize, (canvasWidth-maxPlanetSize)), random(maxPlanetSize, (canvasHeight-maxPlanetSize)));
+        this.pos = createVector(xPos, yPos);
         this.velocity = createVector();
         this.acceleration = createVector();
         
         /* Style-related */
         this.color = random(CONSTANTS['bodyColors']);
-        this.textOffset = JSON.stringify(this.mass).length;
-        this.ts = floor(diameter/5);
+        this.textOffset = JSON.stringify(this.mass).length * 2;
+        this.ts = floor(diameter/4);
     }
 
+    /* Apply a force to a body, given its mass */
     applyForce(force) {
         let f = p5.Vector.div(force, this.mass);
         this.acceleration.add(f);
