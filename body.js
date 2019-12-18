@@ -10,21 +10,13 @@ class Body {
         
         /* Style-related */
         this.color = random(CONSTANTS['bodyColors']);
-<<<<<<< HEAD
         this.textOffset = JSON.stringify(this.mass).length * 2;
         this.ts = floor(diameter/4);
-    }
-
-    /* Apply a force to a body, given its mass */
-=======
-        this.textOffset = JSON.stringify(this.mass).length;
-        this.ts = floor(diameter/6);
     }
 
     /* Apply a given force to a body given its mass
      * A = F / M
     */
->>>>>>> 65a7a2e668b22f074ed423624714ff010549d70a
     applyForce(force) {
         let f = p5.Vector.div(force, this.mass);
         this.acceleration.add(f);
