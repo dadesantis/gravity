@@ -2,6 +2,8 @@ class Body {
     
     constructor(xPos, yPos, diameter, mass) {
         /* Physics-related parameters */
+        this.xPos = xPos;
+        this.yPos = yPos;
         this.diameter = diameter;
         this.mass = mass;
         this.pos = createVector(xPos, yPos);
@@ -10,11 +12,13 @@ class Body {
         
         /* Style-related */
         this.color = random(CONSTANTS['bodyColors']);
-        this.textOffset = JSON.stringify(this.mass).length * 2;
-        this.ts = floor(diameter/4);
+
+        /* Control */
+        this.canUpdate = true;
     }
 
-    /* Apply a given force to a body given its mass
+    /**
+     * Apply a given force to a body given its mass 
      * A = F / M
     */
     applyForce(force) {
@@ -22,7 +26,8 @@ class Body {
         this.acceleration.add(f);
     }
 
-    /* Calculate the current momentum of a body
+    /**
+     * Calculate the current momentum of a body 
      * P = M * V
      */
     calcMomentum() {
@@ -34,19 +39,20 @@ class Body {
     draw() {
         fill(this.color);
         ellipse(this.pos.x, this.pos.y, this.diameter);
-        fill('black');
-        textSize(this.ts);
-        text('m = ' + this.mass, this.pos.x - this.ts, this.pos.y + this.textOffset);
-        text('P =' + this.calcMomentum(), this.pos.x - (this.ts - this.textOffset), this.pos.y + this.ts);
     }
 
     /* Move the Body in the direction of the forces on it */
     update() {
-        this.pos.add(this.velocity);
-        this.velocity.add(this.acceleration);
-        this.velocity.limit(CONSTANTS['MAX_SPEED']);
-        this.acceleration.mult(0);
-        this.wrap();
+        if (this.canUpdate) {
+            this.pos.add(this.velocity);
+            this.velocity.add(this.acceleration);
+            this.velocity.limit(CONSTANTS['MAX_SPEED']);
+            this.acceleration.mult(0);
+            this.wrap();
+        } else {
+            this.xPos = this.diameter + 10;
+            this.yPos = this.diameter + 10;
+        }
     }
 
     /* Thought you can escape this hell? No */
