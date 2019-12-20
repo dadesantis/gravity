@@ -11,7 +11,7 @@ var maxPlanetSize = 200;
 function setup() {
 
 	/* Canvas Styling */
-	canvas = createCanvas(1900, 850);
+	canvas = createCanvas(windowWidth, windowHeight);
 	canvas.background('black');
 	canvas.style('margin', 'auto');
 	canvas.style('display', 'block');
@@ -25,7 +25,7 @@ function setup() {
 
 function draw() {
 
-	canvas.background('black');
+	canvas.background('navy');
 
 	body_1.applyForce(calculateAttraction(body_1, body_2));
 	body_2.applyForce(calculateAttraction(body_2, body_1));

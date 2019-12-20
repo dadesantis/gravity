@@ -11,7 +11,7 @@ class Body {
         /* Style-related */
         this.color = random(CONSTANTS['bodyColors']);
         this.textOffset = JSON.stringify(this.mass).length * 2;
-        this.ts = floor(diameter/4);
+        this.ts = floor(diameter/6);
     }
 
     /* Apply a given force to a body given its mass
