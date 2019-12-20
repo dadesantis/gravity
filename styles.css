@@ -17,5 +17,6 @@
 
 .body_info {
     margin: auto;
-    text-align: center;
+    text-align: left;
+    padding-left: 5%;
 }

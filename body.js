@@ -17,7 +17,8 @@ class Body {
         this.canUpdate = true;
     }
 
-    /* Apply a given force to a body given its mass
+    /**
+     * Apply a given force to a body given its mass 
      * A = F / M
     */
     applyForce(force) {
@@ -25,7 +26,8 @@ class Body {
         this.acceleration.add(f);
     }
 
-    /* Calculate the current momentum of a body
+    /**
+     * Calculate the current momentum of a body 
      * P = M * V
      */
     calcMomentum() {
