@@ -15,15 +15,7 @@
     user-select: none;
 }
 
-/*
-.header-nav {
-    margin-right: auto;
-    position: relative;
-    width: 20%;
-    height: 80%;
-    min-width: 90px;
-    padding: 10px;
-    font-size: 16px;
-    background-color: blanchedalmond;
+.body_info {
+    margin: auto;
+    text-align: center;
 }
-*/

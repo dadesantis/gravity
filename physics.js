@@ -1,7 +1,8 @@
 var CONSTANTS = {
     'MAX_SPEED': 20,
-    'G': 15,
-    'bodyColors': ['brown', 'yellow', 'green']
+    'G': 50,
+    'bodyColors': ['brown', 'yellow', 'green', 'magenta',
+                    'black', 'white', 'red']
 }
 
 function calculateAttraction(body_a, body_b) {
