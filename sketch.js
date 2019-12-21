@@ -81,7 +81,6 @@ function setup() {
 	}
 	
 	getLiveStats(bodies[selected_body]);
-	// bodies.sort((a, b) => (a.diameter < b.diameter) ? 1 : -1);
 }
 
 function draw() {
@@ -123,27 +122,26 @@ function draw_world() {
  * 		 move the numbers into a seperate graphic and draw independently
  */
 function getLiveStats(body) {
+	info.background('white');
+	info.fill('black');
+	info.text('Planet Count: ' + bodies.length, info.width/2 - 8, 25);
+	info.textSize(24);
 	if ( bodies.length < 1) {
-		info.background('white');
-		info.fill('black');
-		info.textSize(24);
 		info.text('No planet to display', 15, 60);
 	} else {
-		info.background('white');
 		info.fill('black');
-		info.text('Info ['+selected_body+']', 80, 20);
-		info.text('Diameter: ' + body.diameter, 40, 40);
-		info.text('Mass: ' + body.mass, 40, 60);
-		info.text('Momentum: ' + body.calcMomentum(), 40, 80);
+		info.text('Info ['+selected_body+']', 80, 25);
+		info.text('Diameter: ' + body.diameter, 40, 50);
+		info.text('Mass: ' + body.mass, 40, 75);
+		info.text('Momentum: ' + body.calcMomentum(), 40, 100);
 		show_body(body);
 	}
 }
 
 function show_body(body) {
 	view_scale = .3;
-	info.textSize(20);
 	info.fill(body.color);
-	info.ellipse(info.width*.1, info.height/1.75, body.diameter*view_scale);
+	info.ellipse(info.width*.1, info.height/1.5, body.diameter*view_scale);
 }
 
 function clicked(body) {
