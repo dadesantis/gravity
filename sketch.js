@@ -79,7 +79,7 @@ function setup() {
 	}
 
 	getLiveStats(bodies[selected_body]);
-	bodies.sort((a, b) => (a.diameter < b.diameter) ? 1 : -1);
+	// bodies.sort((a, b) => (a.diameter < b.diameter) ? 1 : -1);
 
 }
 
@@ -95,13 +95,14 @@ function draw_world() {
 		textSize(50);
 		world.text('No planets to be drawn (⌣́_⌣̀)', width/3, height/2);
 	} else if (bodies.length > 1) {
-		bodies.sort((a, b) => (a.diameter < b.diameter) ? 1 : -1);
-		for (let i = 0; i < bodies.length; i++) {
-			for (let j = 0; j < bodies.length; j++) {
+		temp = bodies;
+		temp.sort((a, b) => (a.diameter < b.diameter) ? 1 : -1);
+		for (let i = 0; i < temp.length; i++) {
+			for (let j = 0; j < temp.length; j++) {
 				if (i != j) {
-					bodies[i].applyForce(calculateAttraction(bodies[i], bodies[j]));
-					bodies[i].update();
-					bodies[i].draw();
+					temp[i].applyForce(calculateAttraction(temp[i], temp[j]));
+					temp[i].update();
+					temp[i].draw();
 				}
 			}
 		}
