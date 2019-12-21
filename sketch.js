@@ -13,7 +13,7 @@ var canvasWidth = 1900;
 var canvasHeight = 850;
 var maxPlanetSize = 200;
 
-var planet_count_scale = 20;
+var planet_count_scale = 25;
 var planet_slider_scale = 2;
 
 function setup() {
@@ -143,7 +143,7 @@ function getLiveStats(body) {
 	info.text('View Scale', info.width/planet_slider_scale - 8, 155);
 	info.textSize(24);
 	if ( bodies.length < 1) {
-		info.text('No planet to display', info.width/planet_count_scale, info.height/planet_count_scale*4);
+		info.text('No planet \nto display', info.width/planet_count_scale, info.height/planet_count_scale*4);
 	} else {
 		info.fill('black');
 		info.text('Info ['+selected_body+']', info.width / planet_count_scale, 25);
