@@ -11,11 +11,21 @@ var canvasHeight = 850;
 var maxPlanetSize = 200;
 
 function setup() {
+
 	/* Create world and info canvases*/
 	info = createGraphics(windowWidth, windowHeight*.3);
 	info.background('white');
 	info.style('margin', 'auto');
 	info.style('display', 'block');
+
+	/* Button controls */
+	plus_button = createButton('Increment');
+	plus_button.position(250, 100);
+	plus_button.mousePressed(increment_bodies);
+	minus_button = createButton('Decrement');
+	minus_button.position(250, 125);
+	minus_button.mousePressed(decrement_bodies);
+
 	
 	world = createCanvas(windowWidth, windowHeight);
 	world.background('navy');
@@ -37,25 +47,42 @@ function draw() {
 function draw_world() {
 	world.background('navy');
 
-	for (let i = 0; i < bodies.length; i++) {
-		for (let j = 0; j < bodies.length; j++) {
-			if (i != j) {
-				bodies[i].applyForce(calculateAttraction(bodies[i], bodies[j]));
-				bodies[i].update();
-				bodies[i].draw();
+	if (bodies.length < 1) {
+		fill('white');
+		textSize(50);
+		world.text('No planets to be drawn (⌣́_⌣̀)', width/3, height/2);
+	} else if (bodies.length > 1) {
+		for (let i = 0; i < bodies.length; i++) {
+			for (let j = 0; j < bodies.length; j++) {
+				if (i != j) {
+					bodies[i].applyForce(calculateAttraction(bodies[i], bodies[j]));
+					bodies[i].update();
+					bodies[i].draw();
+				}
 			}
 		}
+
+		getLiveStats(bodies[0]);
+	} else {
+		bodies[0].draw();
+		bodies[0].update();
+
+		getLiveStats(bodies[0]);
 	}
 
-	getLiveStats(bodies[0]);
+	
 }
 
-// Get the button, and when the user clicks on it, execute myFunction
-document.getElementById("myBtn").onclick = function() {myFunction()};
+function increment_bodies() {
+	bodies.push(new Body(random(maxPlanetSize, (canvasWidth-maxPlanetSize)), random(maxPlanetSize, (canvasHeight-maxPlanetSize)), floor(random(50, 500)), floor(random(50, 500))));
+	console.log(bodies);
+	return;
+}
 
-/* myFunction toggles between adding and removing the show class, which is used to hide and show the dropdown content */
-function myFunction() {
-  document.getElementById("myDropdown").classList.toggle("show");
+function decrement_bodies() {
+	bodies.pop();
+	console.log(bodies);
+	return;
 }
 
 /**
