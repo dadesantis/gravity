@@ -1,4 +1,6 @@
 /* Objects */
+// TODO: Make bodies and array list
+// Make option to create a custom body
 var body_1;
 var body_2;
 var bodies = [];
@@ -94,7 +96,11 @@ function draw_world() {
 		fill('white');
 		textSize(50);
 		world.text('No planets to be drawn (⌣́_⌣̀)', width/3, height/2);
-	} else if (bodies.length > 1) {
+	} else if (bodies.length === 1) {
+		bodies[0].draw();
+		bodies[0].update();
+		getLiveStats(bodies[selected_body]);
+	} else  {
 		temp = bodies;
 		temp.sort((a, b) => (a.diameter < b.diameter) ? 1 : -1);
 		for (let i = 0; i < temp.length; i++) {
@@ -108,11 +114,7 @@ function draw_world() {
 		}
 
 		getLiveStats(bodies[selected_body]);
-	} else {
-		bodies[0].draw();
-		bodies[0].update();
-		getLiveStats(bodies[selected_body]);
-	}
+	} 
 	
 }
 
