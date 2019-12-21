@@ -2,6 +2,7 @@
 var body_1;
 var body_2;
 var bodies = [];
+var num_bodies = 4;
 
 /* Canvas Variables */
 var canvas;
@@ -22,11 +23,11 @@ function setup() {
 	world.style('display', 'block');
 	
 	/* Scene Objects */
-	body_1 = new Body(random(maxPlanetSize, (canvasWidth-maxPlanetSize)), random(maxPlanetSize, (canvasHeight-maxPlanetSize)), floor(random(150, 400)), floor(random(200, 400)));
-	body_2 = new Body(random(maxPlanetSize, (canvasWidth-maxPlanetSize)), random(maxPlanetSize, (canvasHeight-maxPlanetSize)), floor(random(25, 100)), floor(random(50, 100)));
 
-	bodies.push(body_1);
-	bodies.push(body_2);
+	for (let i = 0; i < num_bodies; i++) {
+		bodies.push(new Body(random(maxPlanetSize, (canvasWidth-maxPlanetSize)), random(maxPlanetSize, (canvasHeight-maxPlanetSize)), floor(random(50, 500)), floor(random(50, 500))));
+	}
+
 }
 
 function draw() {
@@ -36,15 +37,25 @@ function draw() {
 function draw_world() {
 	world.background('navy');
 
-	body_1.applyForce(calculateAttraction(body_1, body_2));
-	body_2.applyForce(calculateAttraction(body_2, body_1));
-
-	body_1.draw();
-	body_1.update();
-	body_2.draw();
-	body_2.update();
+	for (let i = 0; i < bodies.length; i++) {
+		for (let j = 0; j < bodies.length; j++) {
+			if (i != j) {
+				bodies[i].applyForce(calculateAttraction(bodies[i], bodies[j]));
+				bodies[i].update();
+				bodies[i].draw();
+			}
+		}
+	}
 
 	getLiveStats(bodies[0]);
+}
+
+// Get the button, and when the user clicks on it, execute myFunction
+document.getElementById("myBtn").onclick = function() {myFunction()};
+
+/* myFunction toggles between adding and removing the show class, which is used to hide and show the dropdown content */
+function myFunction() {
+  document.getElementById("myDropdown").classList.toggle("show");
 }
 
 /**
@@ -63,16 +74,16 @@ function getLiveStats(body) {
 }
 
 function show_body(body) {
-	view_scale = .50;
+	view_scale = .3;
 	info.textSize(20);
 	info.fill(body.color);
-	info.ellipse(info.width*.065, info.height/1.75, body.diameter*view_scale);
+	info.ellipse(info.width*.1, info.height/1.75, body.diameter*view_scale);
 }
 
 function clicked(body) {
 	d = floor(dist(body.pos.x, body.pos.y, mouseX, mouseY));
 	if (d < body.diameter / 2) {
-		console.log(body + " was clicked!");
+		console.debug(body + " was clicked!");
 		return true;
 	} else {
 		return false;
