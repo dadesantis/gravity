@@ -13,6 +13,9 @@ var canvasWidth = 1900;
 var canvasHeight = 850;
 var maxPlanetSize = 200;
 
+var planet_count_scale = 20;
+var planet_slider_scale = 5;
+
 function setup() {
 
 	/* Create world and info canvases*/
@@ -23,23 +26,23 @@ function setup() {
 
 	/* Sliders */
 	gravSlider = createSlider(0, CONSTANTS['MAX_GRAVITY'], 0, CONSTANTS['MAX_GRAVITY']*.1);
-	gravSlider.position(info.width/2, 175);
+	gravSlider.position(info.width/planet_slider_scale, 175);
 
 	viewScaleSlier = createSlider(.01, 1, 1, .01);
-	viewScaleSlier.position(info.width/2, 225);
+	viewScaleSlier.position(info.width/planet_slider_scale, 225);
 
 	/* Button controls */
-	plus_button = createButton('Increment');
-	plus_button.position(info.width/2, 100);
-	plus_button.mousePressed(function() {
+	increment_button = createButton('Increment');
+	increment_button.position(info.width/planet_slider_scale, 100);
+	increment_button.mousePressed(function() {
 		bodies.push(new Body(random(maxPlanetSize, (canvasWidth-maxPlanetSize)), random(maxPlanetSize, (canvasHeight-maxPlanetSize)), floor(random(50, 500)), floor(random(50, 500))));
 		selected_body = bodies.length-1;
 		return;
 	});
 	/* -------------------------------------- */
-	minus_button = createButton('Decrement');
-	minus_button.position(info.width/2, 125);
-	minus_button.mousePressed(function() {
+	decrement_button = createButton('Decrement');
+	decrement_button.position(info.width/planet_slider_scale, 125);
+	decrement_button.mousePressed(function() {
 		bodies.pop();
 		/**
 		 * If there's at least one body, set selected to the last element
@@ -55,7 +58,7 @@ function setup() {
 	});
 	/* -------------------------------------- */
 	next_selected_button = createButton('Next');
-	next_selected_button.position(250, 100);
+	next_selected_button.position(info.width/planet_count_scale*.5, 100);
 	next_selected_button.mousePressed(function() {
 		if (selected_body < bodies.length-1) {
 			selected_body += 1;
@@ -65,7 +68,7 @@ function setup() {
 	});
 	/* -------------------------------------- */
 	prev_selected_button = createButton('Prev');
-	prev_selected_button.position(250, 125);
+	prev_selected_button.position(info.width/planet_count_scale*.5, 125);
 	prev_selected_button.mousePressed(function() {
 		if (selected_body > 0) {
 			selected_body -= 1;
@@ -135,18 +138,18 @@ function draw_world() {
 function getLiveStats(body) {
 	info.background('white');
 	info.fill('black');
-	info.text('Planet Count: ' + bodies.length, info.width/2 - 8, 25);
-	info.text('Gravity', info.width/2 - 8, 105);
-	info.text('View Scale', info.width/2 - 8, 155);
+	info.text('Planet Count: ' + bodies.length, info.width / planet_slider_scale, 25);
+	info.text('Gravity', info.width/planet_slider_scale - 8, 105);
+	info.text('View Scale', info.width/planet_slider_scale - 8, 155);
 	info.textSize(24);
 	if ( bodies.length < 1) {
-		info.text('No planet to display', 15, 60);
+		info.text('No planet to display', info.width/planet_count_scale, 60);
 	} else {
 		info.fill('black');
-		info.text('Info ['+selected_body+']', 80, 25);
-		info.text('Diameter: ' + body.diameter, 40, 50);
-		info.text('Mass: ' + body.mass, 40, 75);
-		info.text('Momentum: ' + body.calcMomentum(), 40, 100);
+		info.text('Info ['+selected_body+']', info.width / planet_count_scale, 25);
+		info.text('Diameter: ' + body.diameter, info.width / planet_count_scale, 50);
+		info.text('Mass: ' + body.mass, info.width / planet_count_scale, 75);
+		info.text('Momentum: ' + body.calcMomentum(), info.width / planet_count_scale, 100);
 		show_body(body);
 	}
 }
@@ -154,7 +157,7 @@ function getLiveStats(body) {
 function show_body(body) {
 	view_scale = .3;
 	info.fill(body.color);
-	info.ellipse(info.width*.1, info.height/1.5, body.diameter*view_scale);
+	info.ellipse(info.width/planet_count_scale*2, info.height/1.5, body.diameter*view_scale);
 }
 
 function clicked(body) {
