@@ -32,11 +32,15 @@ function setup() {
 	world.style('margin', 'auto');
 	world.style('display', 'block');
 	
-	/* Scene Objects */
-
+	/**
+	 * Scene objects
+	 * Draw objects smallest to largest  
+	*/
 	for (let i = 0; i < num_bodies; i++) {
 		bodies.push(new Body(random(maxPlanetSize, (canvasWidth-maxPlanetSize)), random(maxPlanetSize, (canvasHeight-maxPlanetSize)), floor(random(50, 500)), floor(random(50, 500))));
 	}
+
+	bodies.sort((a, b) => (a.diameter < b.diameter) ? 1 : -1);
 
 }
 
@@ -73,8 +77,11 @@ function draw_world() {
 	
 }
 
+/* Button Controls */
+
 function increment_bodies() {
 	bodies.push(new Body(random(maxPlanetSize, (canvasWidth-maxPlanetSize)), random(maxPlanetSize, (canvasHeight-maxPlanetSize)), floor(random(50, 500)), floor(random(50, 500))));
+	bodies.sort((a, b) => (a.diameter < b.diameter) ? 1 : -1);
 	console.log(bodies);
 	return;
 }
