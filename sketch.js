@@ -4,7 +4,7 @@
 var body_1;
 var body_2;
 var bodies = [];
-var num_bodies = 4;
+var num_bodies = 2;
 var selected_body = 0;
 
 /* Canvas Variables */
@@ -75,14 +75,13 @@ function setup() {
 	/**
 	 * Scene objects
 	 * Draw objects smallest to largest  
-	*/
+	 */
 	for (let i = 0; i < num_bodies; i++) {
 		bodies.push(new Body(random(maxPlanetSize, (canvasWidth-maxPlanetSize)), random(maxPlanetSize, (canvasHeight-maxPlanetSize)), floor(random(50, 500)), floor(random(50, 500))));
 	}
-
+	
 	getLiveStats(bodies[selected_body]);
 	// bodies.sort((a, b) => (a.diameter < b.diameter) ? 1 : -1);
-
 }
 
 function draw() {
@@ -101,7 +100,7 @@ function draw_world() {
 		bodies[0].update();
 		getLiveStats(bodies[selected_body]);
 	} else  {
-		temp = bodies;
+		let temp = [...bodies];
 		temp.sort((a, b) => (a.diameter < b.diameter) ? 1 : -1);
 		for (let i = 0; i < temp.length; i++) {
 			for (let j = 0; j < temp.length; j++) {
