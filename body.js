@@ -1,5 +1,5 @@
 class Body {
-    
+
     constructor(xPos, yPos, diameter, mass) {
         /* Physics-related parameters */
         this.xPos = xPos;
@@ -36,9 +36,13 @@ class Body {
     }
 
     /* Draw the initial Body */
-    draw() {
-        fill(this.color);
-        ellipse(this.pos.x, this.pos.y, this.diameter);
+    draw(viewScale) {
+        if (viewScale === undefined || viewScale === 0) {
+            // console.error('View scale not set!');
+        } else {
+            fill(this.color);
+            ellipse(this.pos.x, this.pos.y, this.diameter*viewScale);
+        }
     }
 
     /* Move the Body in the direction of the forces on it */

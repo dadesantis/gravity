@@ -8,7 +8,7 @@ var num_bodies = 2;
 var selected_body = 0;
 
 /* Canvas Variables */
-var canvas;
+var viewScale = 1.0;
 var canvasWidth = 1900;
 var canvasHeight = 850;
 var maxPlanetSize = 200;
@@ -20,6 +20,13 @@ function setup() {
 	info.background('white');
 	info.style('margin', 'auto');
 	info.style('display', 'block');
+
+	/* Sliders */
+	gravSlider = createSlider(0, CONSTANTS['MAX_GRAVITY'], 0, CONSTANTS['MAX_GRAVITY']*.1);
+	gravSlider.position(info.width/2, 175);
+
+	viewScaleSlier = createSlider(.01, 1, 1, .01);
+	viewScaleSlier.position(info.width/2, 225);
 
 	/* Button controls */
 	plus_button = createButton('Increment');
@@ -81,6 +88,7 @@ function setup() {
 	}
 	
 	getLiveStats(bodies[selected_body]);
+
 }
 
 function draw() {
@@ -90,12 +98,15 @@ function draw() {
 function draw_world() {
 	world.background('navy');
 
+	G = gravSlider.value();
+	viewScale = viewScaleSlier.value();
+
 	if (bodies.length < 1) {
 		fill('white');
 		textSize(50);
 		world.text('No planets to be drawn (⌣́_⌣̀)', width/3, height/2);
 	} else if (bodies.length === 1) {
-		bodies[0].draw();
+		bodies[0].draw(viewScale);
 		bodies[0].update();
 		getLiveStats(bodies[selected_body]);
 	} else  {
@@ -106,7 +117,7 @@ function draw_world() {
 				if (i != j) {
 					temp[i].applyForce(calculateAttraction(temp[i], temp[j]));
 					temp[i].update();
-					temp[i].draw();
+					temp[i].draw(viewScale);
 				}
 			}
 		}
@@ -125,6 +136,8 @@ function getLiveStats(body) {
 	info.background('white');
 	info.fill('black');
 	info.text('Planet Count: ' + bodies.length, info.width/2 - 8, 25);
+	info.text('Gravity', info.width/2 - 8, 105);
+	info.text('View Scale', info.width/2 - 8, 155);
 	info.textSize(24);
 	if ( bodies.length < 1) {
 		info.text('No planet to display', 15, 60);
