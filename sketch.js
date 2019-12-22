@@ -136,26 +136,6 @@ function draw_world() {
 	
 }
 
-/* Determine the closest neighbor to a given body */
-function closest_neighbor(body) {
-	let d = 0;
-	// console.log('Closest plant to ' + body.pos + " is " + bodies[index_smallest].pos);
-	let index_smallest = Math.sqrt(Math.pow(world.width, 2) + Math.pow(world.height, 2));
-	let distances = []
-
-	for (let i = 0; i < bodies.length; i++) {
-		distances.push(dist(body.pos.x, body.pos.y, bodies[i].pos.x, bodies[i].pos.y));
-	}
-
-	console.log('before' + distances);
-	distances.sort((a, b) => (a < b) ? 1 : -1);
-	console.log('after' + distances);
-
-
-	// console.log('Closest plant to ' + body.pos + " is " + bodies[index_smallest].pos);
-	return index_smallest;
-}
-
 /**
  * Show the live stats of a body
  * TODO: Make this more efficient (stop constantly overwriting the text)
