@@ -30,7 +30,7 @@ function setup() {
 	world.style('display', 'block');
 	
 	/* Sliders */
-	gravSlider = createSlider(0, CONSTANTS['MAX_GRAVITY'], 0, CONSTANTS['MAX_GRAVITY']*.1);
+	gravSlider = createSlider(0, CONSTANTS['MAX_GRAVITY'], CONSTANTS['MAX_GRAVITY'] / 2, CONSTANTS['MAX_GRAVITY'] * .1);
 	gravSlider.position(info.width/planet_slider_scale, 175);
 	/* -------------------------------------- */
 	viewScaleSlier = createSlider(.1, 1, 1, .01);
@@ -158,7 +158,7 @@ function getLiveStats(body) {
 }
 
 function show_body(body) {
-	view_scale = .25;
+	view_scale = .5;
 	info.fill(body.color);
 	info.ellipse(info.width/planet_count_scale/view_scale, info.height/1.5, body.diameter*viewScaleSlier.value()*view_scale);
 }
