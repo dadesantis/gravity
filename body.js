@@ -53,9 +53,6 @@ class Body {
             this.velocity.limit(CONSTANTS['MAX_SPEED']);
             this.acceleration.mult(0);
             this.wrap();
-        } else {
-            this.xPos = this.diameter + 10;
-            this.yPos = this.diameter + 10;
         }
     }
 
