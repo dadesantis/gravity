@@ -1,0 +1,4 @@
+var PHYSICS_CONSTANTS = {
+    'MAX_SPEED': 5,
+    'MAX_GRAVITY': 10,
+}
