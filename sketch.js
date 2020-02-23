@@ -31,7 +31,7 @@ function setup() {
 	world.style('display', 'block');
 	
 	/* Sliders */
-	gravSlider = createSlider(0, CONSTANTS['MAX_GRAVITY'], CONSTANTS['MAX_GRAVITY'] / 2, CONSTANTS['MAX_GRAVITY'] * .1);
+	gravSlider = createSlider(0, PHYSICS_CONSTANTS['MAX_GRAVITY'], PHYSICS_CONSTANTS['MAX_GRAVITY'] / 2, PHYSICS_CONSTANTS['MAX_GRAVITY'] * .1);
 	gravSlider.position(info.width/planet_slider_scale, 175);
 	/* -------------------------------------- */
 	viewScaleSlier = createSlider(.1, 1, 1, .01);
