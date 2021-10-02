@@ -1,0 +1,23 @@
+{
+  "name": "gravity",
+  "version": "1.0.0",
+  "description": "What if gravity was gravy?",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dadesantis/gravity.git"
+  },
+  "author": "dadesantis",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dadesantis/gravity/issues"
+  },
+  "homepage": "https://github.com/dadesantis/gravity#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "p5": "^1.4.0"
+  }
+}
